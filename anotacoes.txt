@@ -1,0 +1,5 @@
+Spring Framework
+	-Auto configuração
+	- Possui as dependencias necessárias para realizar a aplicacao
+	- Spring Data JPA
+	- Spring Security
