@@ -61,4 +61,6 @@ Porém a model não pode ser uma simples classe do Java, ela precisa possuir as 
     }
 
 ## Ferramentas de Migrações / Migrations - Flyway
+O Flyway é utilizado para realizar alterações no banco de dados e soltar novas versões, onde a cada vez que o servidor é iniciado, é verificado se o projeto possui uma nova versao das migrations, onde precisa estar na pasta resources/db/migrations/script.sql
 ## Validação com o Spring Boot
+
