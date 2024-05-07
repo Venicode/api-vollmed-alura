@@ -28,7 +28,7 @@ public class AgendaDeConsultas {
         }
         Medico medico = escolherMedico(dados);
         Paciente paciente = pacienteRepository.getReferenceById(dados.idPaciente());
-        Agendamento agendamento = new Agendamento(null,medico, paciente, dados.data(),1);
+        Agendamento agendamento = new Agendamento(null,medico, paciente, dados.data(),1,dados.motivoCancelamento());
         agendamentoRepository.save(agendamento);
         return  agendamento;
     }

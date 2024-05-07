@@ -7,6 +7,7 @@ public record DadosDetalhamentoAgendamento(
         Long idMedico,
         Long idPaciente,
         LocalDateTime data,
-        int cancelamento) {
+        int cancelamento,
+        MotivosCancelamento motivoCancelamento) {
 
 }

@@ -21,13 +21,13 @@ public class AgendamentoController {
         return ResponseEntity.ok(new DadosDetalhamentoAgendamento(agendamento.getId(),
                 agendamento.getMedico().getId(),
                 agendamento.getPaciente().getId(),
-                agendamento.getData(),1));
+                agendamento.getData(),1, dados.motivoCancelamento()));
     }
     @DeleteMapping
     @Transactional
     public ResponseEntity<Object> cancelarAgendamento(@RequestBody @Valid DadosCancelamentoAgendamento dados){
         Agendamento agendamento = agendamentoRepository.getReferenceById(dados.idConsulta());
-        agendamento.cancelarAgendamento(agendamento.getData(), dados.dataCancelamento());
+        agendamento.cancelarAgendamento(agendamento.getData(), dados.dataCancelamento(), dados.motivoCancelamento());
         return ResponseEntity.noContent().build();
     }
 }

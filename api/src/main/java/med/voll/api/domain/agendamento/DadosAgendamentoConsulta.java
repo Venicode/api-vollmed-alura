@@ -14,6 +14,7 @@ public record DadosAgendamentoConsulta(
         @Future
         LocalDateTime data,
         Especialidade especialidade,
-        int cancelamento
+        int cancelamento,
+        MotivosCancelamento motivoCancelamento
 ) {
 }

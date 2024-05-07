@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import med.voll.api.domain.ValidacaoException;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.paciente.Paciente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import java.time.LocalDateTime;
 
@@ -31,14 +33,20 @@ public class Agendamento {
     private Paciente paciente;
     private LocalDateTime data;
     private int cancelamento;
+    @Enumerated(EnumType.STRING)
+    private MotivosCancelamento motivoCancelamento;
 
-    public void cancelarAgendamento(LocalDateTime dataConsulta, LocalDateTime dataCancelamento){
+    public void cancelarAgendamento(LocalDateTime dataConsulta, LocalDateTime dataCancelamento, MotivosCancelamento motivoCancelamento) throws HttpMessageNotReadableException {
         if(dataConsulta.toLocalDate().isEqual(dataCancelamento.toLocalDate())){
             throw new ValidacaoException("O cancelamento deve ser feito em até 1 dia antes da consulta.");
         }
         if(dataCancelamento.toLocalDate().isAfter(dataConsulta.toLocalDate())){
             throw new ValidacaoException("Data de cancelamento inválida.");
         }
+        if(motivoCancelamento == null){
+            throw new ValidacaoException("Informe o motivo do cancelamento");
+        }
         cancelamento = 0;
+        this.motivoCancelamento = motivoCancelamento;
     }
 }
