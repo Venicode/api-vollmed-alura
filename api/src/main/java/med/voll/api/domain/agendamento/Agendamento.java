@@ -43,9 +43,6 @@ public class Agendamento {
         if(dataCancelamento.toLocalDate().isAfter(dataConsulta.toLocalDate())){
             throw new ValidacaoException("Data de cancelamento inválida.");
         }
-        if(motivoCancelamento == null){
-            throw new ValidacaoException("Informe o motivo do cancelamento");
-        }
         cancelamento = 0;
         this.motivoCancelamento = motivoCancelamento;
     }
