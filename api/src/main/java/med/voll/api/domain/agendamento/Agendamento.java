@@ -36,14 +36,7 @@ public class Agendamento {
     @Enumerated(EnumType.STRING)
     private MotivosCancelamento motivoCancelamento;
 
-    public void cancelarAgendamento(LocalDateTime dataConsulta, LocalDateTime dataCancelamento, MotivosCancelamento motivoCancelamento) throws HttpMessageNotReadableException {
-        if(dataConsulta.toLocalDate().isEqual(dataCancelamento.toLocalDate())){
-            throw new ValidacaoException("O cancelamento deve ser feito em até 1 dia antes da consulta.");
-        }
-        if(dataCancelamento.toLocalDate().isAfter(dataConsulta.toLocalDate())){
-            throw new ValidacaoException("Data de cancelamento inválida.");
-        }
-        cancelamento = 0;
-        this.motivoCancelamento = motivoCancelamento;
+    public void cancelar(MotivosCancelamento motivo) {
+        this.motivoCancelamento = motivo;
     }
 }

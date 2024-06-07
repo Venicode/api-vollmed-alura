@@ -25,9 +25,8 @@ public class AgendamentoController {
     }
     @DeleteMapping
     @Transactional
-    public ResponseEntity<Object> cancelarAgendamento(@RequestBody @Valid DadosCancelamentoAgendamento dados){
-        Agendamento agendamento = agendamentoRepository.getReferenceById(dados.idConsulta());
-        agendamento.cancelarAgendamento(agendamento.getData(), dados.dataCancelamento(), dados.motivoCancelamento());
+    public ResponseEntity<Object> cancelar(@RequestBody @Valid DadosCancelamentoAgendamento dados) {
+        agendaDeConsultas.cancelar(dados);
         return ResponseEntity.noContent().build();
     }
 }
