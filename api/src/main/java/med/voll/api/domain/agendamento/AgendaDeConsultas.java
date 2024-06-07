@@ -24,7 +24,7 @@ public class AgendaDeConsultas {
     private List<ValidadorAgendamentoDeConsulta> validadoresAgendamento;
     @Autowired
     private List<ValidadorCancelamentoAntecedencia> validadoresCancelamento;
-    public Agendamento agendar(DadosAgendamentoConsulta dados){
+    public DadosDetalhamentoAgendamento agendar(DadosAgendamentoConsulta dados){
 
         if(dados.idMedico() != null) {
             if (!medicoRepository.existsById(dados.idMedico())) {
@@ -38,9 +38,9 @@ public class AgendaDeConsultas {
         validadoresAgendamento.forEach(v -> v.validar(dados));
         Medico medico = escolherMedico(dados);
         Paciente paciente = pacienteRepository.getReferenceById(dados.idPaciente());
-        Agendamento agendamento = new Agendamento(null,medico, paciente, dados.data(),1,dados.motivoCancelamento());
+        Agendamento agendamento = new Agendamento(null,medico, paciente, dados.data(),dados.cancelamento(),dados.motivoCancelamento());
         agendamentoRepository.save(agendamento);
-        return  agendamento;
+        return new DadosDetalhamentoAgendamento(agendamento);
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {

@@ -1,5 +1,6 @@
 package med.voll.api.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import med.voll.api.domain.agendamento.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("agendamentos")
+@SecurityRequirement(name = "bearer-key")
 public class AgendamentoController {
     @Autowired
     private AgendaDeConsultas agendaDeConsultas;
@@ -17,11 +19,8 @@ public class AgendamentoController {
     @PostMapping
     @Transactional
     public ResponseEntity<Object> agendarConsulta(@RequestBody @Valid DadosAgendamentoConsulta dados){
-        Agendamento agendamento= agendaDeConsultas.agendar(dados);
-        return ResponseEntity.ok(new DadosDetalhamentoAgendamento(agendamento.getId(),
-                agendamento.getMedico().getId(),
-                agendamento.getPaciente().getId(),
-                agendamento.getData(),1, dados.motivoCancelamento()));
+        var dto = agendaDeConsultas.agendar(dados);
+        return ResponseEntity.ok(dto);
     }
     @DeleteMapping
     @Transactional

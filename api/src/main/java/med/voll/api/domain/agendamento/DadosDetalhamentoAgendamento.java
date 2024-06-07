@@ -9,5 +9,8 @@ public record DadosDetalhamentoAgendamento(
         LocalDateTime data,
         int cancelamento,
         MotivosCancelamento motivoCancelamento) {
+    public DadosDetalhamentoAgendamento(Agendamento consulta) {
+        this(consulta.getId(), consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getData(),consulta.getCancelamento(),consulta.getMotivoCancelamento());
+    }
 
 }
